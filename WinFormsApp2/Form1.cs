@@ -9,17 +9,30 @@ namespace WinFormsApp2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtName.Text) && !lstNames.Items.Contains(txtName.Text))
+
+            if (string.IsNullOrWhiteSpace(txtName.Text.Trim()))
             {
-                lstNames.Items.Add(txtName.Text);
+                MessageBox.Show("El nombre debe incluir al menos una letra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            if (lstNames.Items.Contains(txtName.Text))
+            {
+                MessageBox.Show("El nombre ya está incluido en la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+                
+            }
+
+            
+            lstNames.Items.Add(txtName.Text);
         }
 
         private void txtName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 13) //If the user pressed enter
             {
-                lstNames.Items.Add(txtName.Text);
+                btnAdd_Click(new Object(), new EventArgs());
             }
         }
     }
