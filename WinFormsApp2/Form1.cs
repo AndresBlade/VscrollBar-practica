@@ -29,6 +29,7 @@ namespace WinFormsApp2
 
 
             lstNames.Items.Add(name);
+            txtName.Text = "";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -42,6 +43,16 @@ namespace WinFormsApp2
             {
                 addName();
             }
+        }
+
+        private void btnScroller_Scroll(object sender, ScrollEventArgs e)
+        {
+            int difference = e.NewValue - e.OldValue;
+
+            //btnAdd.Location = new Point(btnAdd.Location.X, btnAdd.Location.Y + difference);
+
+            this.Size = new Size(this.Size.Width + difference, this.Size.Height + difference);
+
         }
     }
 }
