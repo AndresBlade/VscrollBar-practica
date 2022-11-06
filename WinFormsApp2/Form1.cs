@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace WinFormsApp2
 {
     public partial class Form1 : Form
@@ -7,9 +9,8 @@ namespace WinFormsApp2
             InitializeComponent();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void addName()
         {
-
             if (string.IsNullOrWhiteSpace(txtName.Text.Trim()))
             {
                 MessageBox.Show("El nombre debe incluir al menos una letra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -21,18 +22,25 @@ namespace WinFormsApp2
                 MessageBox.Show("El nombre ya está incluido en la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
 
-                
+
             }
 
-            
-            lstNames.Items.Add(txtName.Text);
+            string name = txtName.Text.Substring(0, 1).ToUpper() + txtName.Text.Substring(1).ToLower();
+
+
+            lstNames.Items.Add(name);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            addName();
         }
 
         private void txtName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 13) //If the user pressed enter
             {
-                btnAdd_Click(new Object(), new EventArgs());
+                addName();
             }
         }
     }
